@@ -1,4 +1,6 @@
-export const APIS = {};
+export const APIS = {
+  products: "/products",
+};
 
 export const PagesURLS = {
   home: "/",
