@@ -7,8 +7,8 @@ import { Toaster } from "sonner";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Confider",
-  description: "The Deal Flow Engine for Small Business Funding & Exits",
+  title: "STC-Task",
+  description: "STC E-commerce Task",
 };
 
 export default function RootLayout({
@@ -22,8 +22,8 @@ export default function RootLayout({
         <div>
           <section>
             {children}
-            <Toaster richColors duration={20000} />
-          </section>
+            <Toaster richColors duration={3000} />
+          </section>  
         </div>
       </body>
     </html>
