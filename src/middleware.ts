@@ -9,12 +9,12 @@ export async function middleware(request: NextRequest) {
     pathname.startsWith(prefix)
   );
 
-  if (isRouteAllowed) {
-    return NextResponse.next();
-  }
-
   if (pathname === "/") {
     return NextResponse.redirect(new URL(PagesURLS.products, request.url));
+  }
+
+  if (isRouteAllowed) {
+    return NextResponse.next();
   }
   return NextResponse.redirect(new URL(PagesURLS.home, request.url));
 }
