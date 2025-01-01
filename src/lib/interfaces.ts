@@ -3,8 +3,9 @@ export interface IProduct {
   name: string;
   image: string;
   price: number;
-  countAvailableInStock: number;
+  countAvailable: number;
   brand: string;
+  isBestSeller: boolean;
 }
 
 export interface ICartItem {
