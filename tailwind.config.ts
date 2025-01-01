@@ -33,13 +33,8 @@ const config = {
       },
       colors: {
         primaryNavy: "#1e293b",
-        brandingBlue: "#96C1FF",
-        brandingRed: "#E51E2E",
         secondaryCyan: "#A8C5DA",
         secondaryGreen: "#47BAB4",
-        formBg: "#d7d7d7",
-        nda: "#18181B80",
-
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

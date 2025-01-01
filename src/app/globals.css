@@ -69,42 +69,42 @@
 }
 
 @layer base {
-  p {
-    @apply text-slate-800;
+  p, span {
+    @apply text-slate-600;
   }
 
   /* Apply styles to div but exclude those inside .toaster or sonner components */
   .main-content div:not(.toaster):not(.toaster *) {
-    @apply text-slate-800;
+    @apply text-slate-600;
   }
 
   h1 {
-    @apply text-slate-800;
+    @apply text-slate-600;
     @apply text-4xl;
     @apply font-bold;
   }
   h2 {
-    @apply text-slate-800;
+    @apply text-slate-600;
     @apply text-3xl;
     @apply font-bold;
   }
   h3 {
-    @apply text-slate-800;
+    @apply text-slate-600;
     @apply text-2xl;
     @apply font-bold;
   }
   h4 {
-    @apply text-slate-800;
+    @apply text-slate-600;
     @apply text-xl;
     @apply font-semibold;
   }
   h5 {
-    @apply text-slate-800;
+    @apply text-slate-600;
     @apply text-base; /*or text-lg */
     @apply font-semibold;
   }
   h6 {
-    @apply text-slate-800;
+    @apply text-slate-600;
     @apply text-sm;
     @apply font-semibold;
   }
