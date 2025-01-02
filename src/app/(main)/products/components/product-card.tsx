@@ -22,7 +22,7 @@ function ProductCard({ product, editCart, cartItems }: ProductCardProps) {
     toast.success("Yout product added to cart");
   };
 
-  const removeFromCart = (id: number) => {
+  const deleteFromCart = (id: number) => {
     editCart(id, CartAction.DELETE);
     toast.warning("Yout product removed from cart");
   };
@@ -68,7 +68,7 @@ function ProductCard({ product, editCart, cartItems }: ProductCardProps) {
         <Button
           variant={"outline"}
           onClick={() => {
-            removeFromCart(product?.id);
+            deleteFromCart(product?.id);
           }}
         >
           <Image
