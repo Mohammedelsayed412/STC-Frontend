@@ -2,15 +2,30 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription } from "@/components/ui/card";
 import CustomTooltip from "@/components/ui/custom/tooltip-custom";
-import { IProduct } from "@/lib/interfaces";
+import { CartAction } from "@/lib/enums";
+import { ICartItem, IProduct } from "@/lib/interfaces";
+import { getQuantity } from "@/lib/utils";
+import { useCartStore } from "@/store/useCartStore";
 import { Heart } from "lucide-react";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect } from "react";
+import { toast } from "sonner";
 
 interface ProductCardProps {
   product: IProduct;
+  editCart: any;
+  cartItems: ICartItem[];
 }
-function ProductCard({ product }: ProductCardProps) {
+function ProductCard({ product, editCart, cartItems }: ProductCardProps) {
+  const addToCart = (id: number) => {
+    editCart(id, CartAction.ADD);
+    toast.success("Yout product added to cart");
+  };
+
+  const removeFromCart = (id: number) => {
+    editCart(id, CartAction.DELETE);
+    toast.warning("Yout product removed from cart");
+  };
   return (
     <Card
       key={product.id}
@@ -49,8 +64,29 @@ function ProductCard({ product }: ProductCardProps) {
           </span>
         )}
       </CardContent>
-      {product?.countAvailable > 0 ? (
-        <Button variant={"outline"}>
+      {getQuantity(cartItems, product?.id) ? (
+        <Button
+          variant={"outline"}
+          onClick={() => {
+            removeFromCart(product?.id);
+          }}
+        >
+          <Image
+            className="mr-2"
+            src={"/remove-from-cart.svg"}
+            alt="Remove From Cart"
+            width={20}
+            height={20}
+          />
+          <p className="text-base">Remove From Cart</p>
+        </Button>
+      ) : product?.countAvailable > 0 ? (
+        <Button
+          variant={"outline"}
+          onClick={() => {
+            addToCart(product?.id);
+          }}
+        >
           <Image
             className="mr-2"
             src={"/add-to-cart.svg"}

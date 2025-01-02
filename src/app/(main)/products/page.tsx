@@ -6,11 +6,14 @@ import { IProduct } from "@/lib/interfaces";
 import ProductCard from "./components/product-card";
 import PaginationComponent from "./components/pagination";
 import { toast } from "sonner";
+import { useCartStore } from "@/store/useCartStore";
 
 function Products() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const [products, setProducts] = useState<IProduct[]>([]);
+  const cartItems: any = useCartStore((state) => state.cartItems);
+  const editCart: any = useCartStore((state) => state.editCart);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -35,7 +38,7 @@ function Products() {
             {products?.map((elem: IProduct) => {
               return (
                 <div key={elem?.id}>
-                  <ProductCard product={elem} />
+                  <ProductCard product={elem} editCart={editCart} cartItems={cartItems} />
                 </div>
               );
             })}
