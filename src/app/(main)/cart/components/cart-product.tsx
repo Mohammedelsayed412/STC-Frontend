@@ -5,7 +5,7 @@ import CustomTooltip from "@/components/ui/custom/tooltip-custom";
 import { CartAction } from "@/lib/enums";
 import { ICartProduct } from "@/lib/interfaces";
 import { getQuantity } from "@/lib/utils";
-import { Trash2 } from "lucide-react";
+import { Minus, Plus, Trash2 } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 import { toast } from "sonner";
@@ -25,7 +25,10 @@ function CartProduct({ cartProduct, editCart, cartItems }: CartProductProps) {
     toast.warning("This item has been removed from your cart");
   };
   return (
-    <Card key={cartProduct.id} className="flex items-start p-4 md:p-8 gap-4 mx-auto">
+    <Card
+      key={cartProduct.id}
+      className="flex items-start p-4 md:p-8 gap-4 mx-auto"
+    >
       <div className="min-w-36 min-h-20">
         <Image
           src={cartProduct?.image}
@@ -38,18 +41,10 @@ function CartProduct({ cartProduct, editCart, cartItems }: CartProductProps) {
 
       <div className="flex flex-col gap-2 w-full">
         <CardContent className="p-0">
-          <div className="flex flex-col gap-1 md:flex-row justify-between">
-            <CustomTooltip info={cartProduct?.name}>
-              <p className="font-medium text-base md:text-xl">
-                {cartProduct?.name}
-              </p>
-            </CustomTooltip>
-            <Badge className="rounded-lg bg-purple-950 max-w-[86px]">
-              <p className="text-xs text-white">
-                Quantity: {cartProduct?.quantity}
-              </p>
-            </Badge>
-          </div>
+          <p className="font-medium text-base">
+            {cartProduct?.name}
+          </p>
+
           <span className=" text-muted-foreground text-sm">Get it </span>
           <span className="text-emerald-500 text-sm">Tomorrow</span>
           <div className="flex items-center gap-0.5 mt-1.5">
@@ -57,11 +52,27 @@ function CartProduct({ cartProduct, editCart, cartItems }: CartProductProps) {
             <span className="font-medium text-lg">{cartProduct?.price}</span>
           </div>
         </CardContent>
-        <div>
+        <div className="flex flex-col md:flex-row gap-2 justify-between">
           <Button variant={"outline"}>
             <Trash2 width={16} height={16} className="mr-2" />
             Remove
           </Button>
+          <Badge
+            className="flex justify-between bg-purple-950 rounded-lg"
+            variant="outline"
+          >
+            <Button
+              variant={"ghost"}
+              size={"icon"}
+              className="hover:bg-purple-800 hover:text-white"
+            >
+              <Minus width={20} height={20} />
+            </Button>
+            <p className="text-base font-medium text-white mx-2">15</p>
+            <Button variant={"ghost"} size={"icon"}>
+              <Plus width={20} height={20} />
+            </Button>
+          </Badge>
         </div>
       </div>
     </Card>
