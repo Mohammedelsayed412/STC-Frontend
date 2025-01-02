@@ -25,7 +25,7 @@ function CartProduct({ cartProduct, editCart, cartItems }: CartProductProps) {
     toast.warning("This item has been removed from your cart");
   };
   return (
-    <Card key={cartProduct.id} className="flex items-start p-8 gap-4 mx-auto">
+    <Card key={cartProduct.id} className="flex items-start p-4 md:p-8 gap-4 mx-auto">
       <div className="min-w-36 min-h-20">
         <Image
           src={cartProduct?.image}
@@ -38,22 +38,22 @@ function CartProduct({ cartProduct, editCart, cartItems }: CartProductProps) {
 
       <div className="flex flex-col gap-2 w-full">
         <CardContent className="p-0">
-          <div className="flex justify-between">
+          <div className="flex flex-col gap-1 md:flex-row justify-between">
             <CustomTooltip info={cartProduct?.name}>
               <p className="font-medium text-base md:text-xl">
                 {cartProduct?.name}
               </p>
             </CustomTooltip>
-            <Badge className="rounded-lg bg-purple-950">
-              <p className="text-sm text-white">
+            <Badge className="rounded-lg bg-purple-950 max-w-[86px]">
+              <p className="text-xs text-white">
                 Quantity: {cartProduct?.quantity}
               </p>
             </Badge>
           </div>
           <span className=" text-muted-foreground text-sm">Get it </span>
           <span className="text-emerald-500 text-sm">Tomorrow</span>
-          <div className="flex items-start mt-1.5">
-            <span className="text-xs  mr-0.5 mt-[0.5px]">SAR</span>
+          <div className="flex items-center gap-0.5 mt-1.5">
+            <span className="text-xs">SAR</span>
             <span className="font-medium text-lg">{cartProduct?.price}</span>
           </div>
         </CardContent>
