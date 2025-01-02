@@ -1,10 +1,6 @@
+import { ICartItem, ICartProduct } from "@/lib/interfaces";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-
-export interface ICartItem {
-  productId: number;
-  quantity: number;
-}
 
 export enum CartAction {
   ADD = "add",
@@ -18,7 +14,7 @@ type CartState = {
   totalQuantity: number;
   editCart: (id: number, action: CartAction, price: number) => void;
   clearCart: () => void;
-  setInitialCart: (cartData: ICartItem[]) => void; // Function to set initial cart
+  setInitialCart: (cartData: ICartProduct[]) => void; // Accept full product input
   getQuantityById: (id: number) => number; // Function to get quantity of item by id
 };
 
@@ -43,21 +39,16 @@ export const useCartStore = create<CartState>()(
           // Handle Add action
           if (action === CartAction.ADD) {
             if (existingItemIndex >= 0) {
-              // Item already exists, increment the quantity
               updatedItems[existingItemIndex].quantity += 1;
-              updatedTotalPrice += price; // Add item's price
-              updatedTotalQuantity += 1; // Increment total quantity
+              updatedTotalPrice += price;
+              updatedTotalQuantity += 1;
             } else {
-              // New item, add it to the cart with quantity 1
               updatedItems = [
                 ...state.cartItems,
-                {
-                  productId: id,
-                  quantity: 1, // Start with quantity 1
-                },
+                { productId: id, quantity: 1 },
               ];
-              updatedTotalPrice += price; // Add item's price
-              updatedTotalQuantity += 1; // Increment total quantity
+              updatedTotalPrice += price;
+              updatedTotalQuantity += 1;
             }
           }
 
@@ -67,8 +58,8 @@ export const useCartStore = create<CartState>()(
               const currentItem = updatedItems[existingItemIndex];
               if (currentItem.quantity > 1) {
                 updatedItems[existingItemIndex].quantity -= 1;
-                updatedTotalPrice -= price; // Subtract item's price
-                updatedTotalQuantity -= 1; // Decrement total quantity
+                updatedTotalPrice -= price;
+                updatedTotalQuantity -= 1;
               }
             }
           }
@@ -77,8 +68,8 @@ export const useCartStore = create<CartState>()(
           else if (action === CartAction.DELETE) {
             if (existingItemIndex >= 0) {
               const currentItem = updatedItems[existingItemIndex];
-              updatedTotalPrice -= currentItem.quantity * price; // Subtract item's total price
-              updatedTotalQuantity -= currentItem.quantity; // Subtract item's total quantity
+              updatedTotalPrice -= currentItem.quantity * price;
+              updatedTotalQuantity -= currentItem.quantity;
               updatedItems = updatedItems.filter(
                 (item) => item.productId !== id
               );
@@ -96,21 +87,21 @@ export const useCartStore = create<CartState>()(
       // Clear the cart
       clearCart: () => set({ cartItems: [], totalPrice: 0, totalQuantity: 0 }),
 
-      // Set initial cart data with actual product details
+      // Set initial cart data with full product input
       setInitialCart: (cartData) => {
         set(() => {
           const cartItems = cartData.map((product) => ({
-            productId: product.productId,
+            productId: product.id,
             quantity: product.quantity,
           }));
 
-          const totalQuantity = cartItems.reduce(
-            (sum, item) => sum + item.quantity,
+          const totalQuantity = cartData.reduce(
+            (sum, product) => sum + product.quantity,
             0
           );
 
-          const totalPrice = cartItems.reduce(
-            (sum, item) => sum + item.quantity * 0, // Placeholder for price calculation on editCart
+          const totalPrice = cartData.reduce(
+            (sum, product) => sum + product.quantity * product.price,
             0
           );
 
@@ -120,9 +111,9 @@ export const useCartStore = create<CartState>()(
 
       // Function to get quantity of item by id
       getQuantityById: (id) => {
-        const state = get(); // Access the current state using get()
+        const state = get();
         const item = state.cartItems.find((item) => item.productId === id);
-        return item ? item.quantity : 0; // Return quantity or 0 if item is not found
+        return item ? item.quantity : 0;
       },
     }),
     {

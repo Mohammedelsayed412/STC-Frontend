@@ -9,10 +9,8 @@ export async function fetchCart(): Promise<any> {
     const response = await axiosInterceptorInstance.get(url);
     console.log("response.data", response);
     // TODO ==> validate payload
-    const cartData = response?.data?.products;
-    const totalPrice = response?.data?.totalPrice;
-    const totalNumber = response?.data?.totalNumber;
-    return {cartData, totalPrice, totalNumber};
+    const cartData = response?.data;
+    return cartData;
   } catch (error: any) {
     console.error("Failed to fetch cart", error);
     throw new Error();

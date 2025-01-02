@@ -15,12 +15,14 @@ function Cart() {
   const cartItems: any = useCartStore((state) => state.cartItems);
   const editCart: any = useCartStore((state) => state.editCart);
   const totalQuantity: any = useCartStore((state) => state.totalQuantity);
+  const totalPrice: any = useCartStore((state) => state.totalPrice);
+  const setInitialCart: any = useCartStore((state) => state.setInitialCart);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { cartData, totalPrice, totalNumber } = await fetchCart();
-
+        const cartData = await fetchCart();
+        setInitialCart(cartData)
         setCartProducts(cartData);
         setTotalPages(totalPages);
       } catch (error: any) {
@@ -54,8 +56,8 @@ function Cart() {
         <Card className="flex flex-col items-start p-8 gap-4 mx-auto">
           <p className="font-medium">Order Summary</p>
           <div className="w-full pl-2 grid grid-cols-2">
-            <p>{`Subtotal (${cartProducts?.length}) `}</p>
-            <p className="ml-auto">{50}</p>
+            <p>{`Subtotal (${totalQuantity}) `}</p>
+            <p className="ml-auto">{totalPrice}</p>
           </div>
           <p></p>
         </Card>

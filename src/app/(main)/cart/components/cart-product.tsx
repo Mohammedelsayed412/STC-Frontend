@@ -16,7 +16,6 @@ interface CartProductProps {
   cartItems: any;
 }
 function CartProduct({ cartProduct, editCart, cartItems }: CartProductProps) {
-  const cartQuantity = getQuantity(cartItems, cartProduct?.id);
   const addToCart = (id: number, productPrice: number) => {
     editCart(id, CartAction.ADD, productPrice);
   };
@@ -50,7 +49,7 @@ function CartProduct({ cartProduct, editCart, cartItems }: CartProductProps) {
           </div>
         </CardContent>
         <div>
-          <Button variant={"outline"} >
+          <Button variant={"outline"}>
             <Trash2 width={16} height={16} className="mr-2" />
             Remove
           </Button>
