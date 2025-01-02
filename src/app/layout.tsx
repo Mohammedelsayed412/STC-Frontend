@@ -22,7 +22,7 @@ export default function RootLayout({
         <div>
           <section>
             {children}
-            <Toaster richColors duration={3000} />
+            <Toaster richColors duration={2000} />
           </section>  
         </div>
       </body>
