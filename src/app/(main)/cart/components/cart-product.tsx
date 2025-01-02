@@ -16,8 +16,8 @@ interface CartProductProps {
   cartItems: any;
 }
 function CartProduct({ cartProduct, editCart, cartItems }: CartProductProps) {
-  console.log('cartProduct',cartProduct);
-  
+  console.log("cartProduct", cartProduct);
+
   const addToCart = (id: number, productPrice: number) => {
     editCart(id, CartAction.ADD, productPrice);
   };
@@ -71,6 +71,7 @@ function CartProduct({ cartProduct, editCart, cartItems }: CartProductProps) {
             variant="outline"
           >
             <Button
+              disabled={cartProduct?.quantity <= 1}
               variant={"ghost"}
               size={"icon"}
               className="hover:bg-purple-800 hover:text-white"
@@ -84,6 +85,7 @@ function CartProduct({ cartProduct, editCart, cartItems }: CartProductProps) {
               {cartProduct?.quantity}
             </p>
             <Button
+              disabled={cartProduct?.quantity >= cartProduct?.countAvailable}
               variant={"ghost"}
               size={"icon"}
               onClick={() => {

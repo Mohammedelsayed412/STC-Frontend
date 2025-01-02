@@ -3,7 +3,6 @@ import { ICartItem, ICartProduct } from "@/lib/interfaces";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-
 type CartState = {
   cartItems: ICartItem[];
   totalPrice: number;
@@ -31,12 +30,12 @@ export const useCartStore = create<CartState>()(
           let updatedItems = [...state.cartItems];
           let updatedTotalPrice = state.totalPrice;
           let updatedTotalQuantity = state.totalQuantity;
-          console.log('id',id);
-          console.log('state.cartItems',state.cartItems);
-          
-          console.log('updatedItems',updatedItems);
-          console.log('existingItemIndex',existingItemIndex);
-          
+          console.log("id", id);
+          console.log("state.cartItems", state.cartItems);
+
+          console.log("updatedItems", updatedItems);
+          console.log("existingItemIndex", existingItemIndex);
+
           // Handle Add action
           if (action === CartAction.ADD) {
             if (existingItemIndex >= 0) {
@@ -44,10 +43,7 @@ export const useCartStore = create<CartState>()(
               updatedTotalPrice += price;
               updatedTotalQuantity += 1;
             } else {
-              updatedItems = [
-                ...state.cartItems,
-                { id: id, quantity: 1 },
-              ];
+              updatedItems = [...state.cartItems, { id: id, quantity: 1 }];
               updatedTotalPrice += price;
               updatedTotalQuantity += 1;
             }
@@ -71,9 +67,7 @@ export const useCartStore = create<CartState>()(
               const currentItem = updatedItems[existingItemIndex];
               updatedTotalPrice -= currentItem.quantity * price;
               updatedTotalQuantity -= currentItem.quantity;
-              updatedItems = updatedItems.filter(
-                (item) => item.id !== id
-              );
+              updatedItems = updatedItems.filter((item) => item.id !== id);
             }
           }
 
@@ -93,11 +87,11 @@ export const useCartStore = create<CartState>()(
         set(() => {
           const cartItems = cartData.map((product) => ({
             id: product?.id,
+            countAvailable: product?.countAvailable,
             name: product?.name,
             image: product?.image,
             price: product?.price,
             quantity: product?.quantity,
-
           }));
 
           const totalQuantity = cartData.reduce(
