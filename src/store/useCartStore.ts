@@ -72,13 +72,9 @@ export const useCartStore = create<CartState>()(
 
       clearCart: () => set({ cartItems: [], totalPrice: 0, totalQuantity: 0 }),
 
-      getQuantityById: (id) => {
-        console.log('id',id);
-        
+      getQuantityById: (id) => {        
         const state = get();
-        const item = state.cartItems.find((item) => item.id === id);
-        console.log('item',item);
-        
+        const item = state.cartItems.find((item) => item.id === id);        
         return item ? item.quantity : 0;
       },
     }),
