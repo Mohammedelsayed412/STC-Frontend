@@ -13,7 +13,7 @@ const buttonVariants = cva(
         default:
           "bg-slate-800 text-primary-foreground shadow hover:bg-slate-700",
         primary:
-          "bg-blue-600 text-primary-foreground shadow hover:bg-blue-500",
+          "bg-purple-950 text-primary-foreground shadow hover:bg-purple-900",
         destructive:
           "bg-red-500 text-white shadow-sm hover:bg-[#EF4444]",
         outline:
