@@ -44,14 +44,16 @@ const ListingsLayout: React.FC<RootLayoutProps> = ({ children }) => {
             Cart
           </Link>
         </div>
-        <div className="relative">
-          {totalQuantity > 0 && (
-            <span className="absolute bottom-[22px] right-2 text-white text-xs font-medium">
-              {totalQuantity}
-            </span>
-          )}
-          <ShoppingCart width={30} height={30} className="text-white" />
-        </div>
+        <Link href={PagesURLS.cart}>
+          <div className="relative">
+            {totalQuantity > 0 && (
+              <span className="absolute bottom-[22px] right-2 text-white text-xs font-medium">
+                {totalQuantity}
+              </span>
+            )}
+            <ShoppingCart width={30} height={30} className="text-white" />
+          </div>
+        </Link>
       </header>
       {children}
     </>
