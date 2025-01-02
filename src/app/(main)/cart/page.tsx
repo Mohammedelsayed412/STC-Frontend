@@ -9,8 +9,11 @@ import { Card } from "@/components/ui/card";
 import { ArrowRight, ShoppingCart } from "lucide-react";
 import { Button, buttonVariants } from "@/components/ui/button";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { PagesURLS } from "@/constants/urls";
 
 function Cart() {
+  const router = useRouter();
   const cartItems: any = useCartStore((state) => state.cartItems);
   const editCart: any = useCartStore((state) => state.editCart);
   const totalQuantity: any = useCartStore((state) => state.totalQuantity);
@@ -20,6 +23,7 @@ function Cart() {
   const checkout = () => {
     clearCart();
     toast.success("Your order is placed successfully with id 2175.");
+    router.push(PagesURLS.orders);
   };
 
   return (

@@ -7,6 +7,7 @@ export const PagesURLS = {
   home: "/",
   products: "/products",
   cart: "/cart",
+  orders: "/orders",
 };
 
 export const allowedRoutes = [

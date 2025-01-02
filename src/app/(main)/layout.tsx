@@ -43,6 +43,14 @@ const ListingsLayout: React.FC<RootLayoutProps> = ({ children }) => {
           >
             Cart
           </Link>
+          <Link
+            href={PagesURLS.orders}
+            className={`px-4 py-2 text-lg ${
+              pathname.includes(PagesURLS.orders) ? "text-white" : "text-gray-400"
+            }`}
+          >
+            Orders
+          </Link>
         </div>
         <Link href={PagesURLS.cart}>
           <div className="relative">
