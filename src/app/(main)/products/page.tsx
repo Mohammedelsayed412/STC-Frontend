@@ -13,6 +13,7 @@ function Products() {
   const [totalPages, setTotalPages] = useState(0);
   const [products, setProducts] = useState<IProduct[]>([]);
   const editCart: any = useCartStore((state) => state.editCart);
+  const cartItems: any = useCartStore((state) => state.cartItems);
   const getQuantityById: any = useCartStore((state) => state.getQuantityById);
 
   useEffect(() => {
@@ -42,6 +43,7 @@ function Products() {
                     product={elem}
                     editCart={editCart}
                     getQuantityById={getQuantityById}
+                    cartItems={cartItems}
                   />
                 </div>
               );

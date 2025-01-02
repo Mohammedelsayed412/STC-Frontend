@@ -2,27 +2,27 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { CartAction } from "@/lib/enums";
-import { IProduct } from "@/lib/interfaces";
+import { ICartItem, IProduct } from "@/lib/interfaces";
 import { Minus, Plus, Trash2 } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 import { toast } from "sonner";
 
 interface CartProductProps {
-  cartProduct: IProduct;
+  cartProduct: ICartItem;
   editCart: any;
   cartItems: any;
 }
 function CartProduct({ cartProduct, editCart, cartItems }: CartProductProps) {
-  const addToCart = (product: IProduct) => {
+  const addToCart = (product: ICartItem) => {
     editCart(CartAction.ADD, product);
   };
 
-  const subtractToCart = (product: IProduct) => {
+  const subtractToCart = (product: ICartItem) => {
     editCart(CartAction.SUBTRACT, product);
   };
 
-  const deleteFromCart = (product: IProduct) => {
+  const deleteFromCart = (product: ICartItem) => {
     editCart(CartAction.DELETE, product);
     toast.warning("This item has been removed from your cart");
   };

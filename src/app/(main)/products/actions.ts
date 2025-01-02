@@ -1,4 +1,4 @@
-'use server'
+"use server";
 
 import { APIS } from "@/constants/urls";
 import axiosInterceptorInstance from "@/lib/axiosInterceptorInstance";
@@ -12,7 +12,6 @@ export async function fetchProducts(currentpage: number): Promise<any> {
     console.log(`Fetching Products Request URL => ${url}`);
 
     const response = await axiosInterceptorInstance.get(url);
-    console.log("response.data", response);
     // TODO ==> validate payload
     const productsData = response?.data?.products;
     const totalPages = response?.data?.totalPages;

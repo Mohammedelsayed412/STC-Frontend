@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { IProduct } from "@/lib/interfaces";
+import { ICartItem, IProduct } from "@/lib/interfaces";
 import { toast } from "sonner";
 import { useCartStore } from "@/store/useCartStore";
 import CartProduct from "./components/cart-product";
@@ -14,7 +14,7 @@ import { PagesURLS } from "@/constants/urls";
 
 function Cart() {
   const router = useRouter();
-  const cartItems: any = useCartStore((state) => state.cartItems);
+  const cartItems: ICartItem[] = useCartStore((state) => state.cartItems);
   const editCart: any = useCartStore((state) => state.editCart);
   const totalQuantity: any = useCartStore((state) => state.totalQuantity);
   const totalPrice: any = useCartStore((state) => state.totalPrice);
@@ -35,7 +35,7 @@ function Cart() {
         <div className="flex flex-col lg:flex-row gap-5 ">
           <div className="w-full">
             <div className="grid grid-cols-1 gap-5">
-              {cartItems?.map((elem: IProduct) => {
+              {cartItems?.map((elem: ICartItem) => {
                 return (
                   <div key={elem?.id}>
                     <CartProduct

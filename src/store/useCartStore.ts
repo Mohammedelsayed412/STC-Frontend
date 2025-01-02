@@ -7,7 +7,7 @@ type CartState = {
   cartItems: ICartItem[];
   totalPrice: number;
   totalQuantity: number;
-  editCart: (action: CartAction, product: IProduct) => void;
+  editCart: (action: CartAction, product: ICartItem) => void;
   clearCart: () => void;
   getQuantityById: (id: number) => number;
 };
@@ -73,8 +73,12 @@ export const useCartStore = create<CartState>()(
       clearCart: () => set({ cartItems: [], totalPrice: 0, totalQuantity: 0 }),
 
       getQuantityById: (id) => {
+        console.log('id',id);
+        
         const state = get();
         const item = state.cartItems.find((item) => item.id === id);
+        console.log('item',item);
+        
         return item ? item.quantity : 0;
       },
     }),

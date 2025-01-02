@@ -3,23 +3,29 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import CustomTooltip from "@/components/ui/custom/tooltip-custom";
 import { CartAction } from "@/lib/enums";
-import { IProduct } from "@/lib/interfaces";
+import { ICartItem, IProduct } from "@/lib/interfaces";
 import Image from "next/image";
-import React, { useEffect } from "react";
+import React from "react";
 import { toast } from "sonner";
 
 interface ProductCardProps {
   product: IProduct;
   editCart: any;
   getQuantityById: any;
+  cartItems: ICartItem;
 }
-function ProductCard({ product, editCart, getQuantityById }: ProductCardProps) {
-  const addToCart = (product: IProduct) => {
+function ProductCard({
+  product,
+  editCart,
+  getQuantityById,
+  cartItems,
+}: ProductCardProps) {
+  const addToCart = (product: ICartItem) => {
     editCart(CartAction.ADD, product);
     toast.success("This item has been added to your cart");
   };
 
-  const deleteFromCart = (product: IProduct) => {
+  const deleteFromCart = (product: ICartItem) => {
     editCart(CartAction.DELETE, product);
     toast.warning("This item has been removed from your cart");
   };
