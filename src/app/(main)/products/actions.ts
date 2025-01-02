@@ -8,7 +8,7 @@ export async function fetchProducts(currentpage: number): Promise<any> {
   try {
     console.log("Fetching Products...");
 
-    const url = `${APIS.products}?page=${currentpage}&size=20`;
+    const url = `${APIS.products}?page=${currentpage}&size=10`;
     console.log(`Fetching Products Request URL => ${url}`);
 
     const response = await axiosInterceptorInstance.get(url);

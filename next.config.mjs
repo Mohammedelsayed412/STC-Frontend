@@ -2,9 +2,17 @@
 const nextConfig = {
     reactStrictMode: false,
     images: {
-        // TODO=> convert this to new domain
-        domains: ['www.shutterstock.com'],
-      },
+      remotePatterns: [
+        {
+          protocol: 'https',
+          hostname: '**',
+        },
+        {
+          protocol: 'http',
+          hostname: '**',
+        },
+      ],
+    },
 };
 
 export default nextConfig;
