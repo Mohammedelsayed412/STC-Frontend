@@ -5,6 +5,7 @@ import { fetchProducts } from "./actions";
 import { IProduct } from "@/lib/interfaces";
 import ProductCard from "./components/product-card";
 import PaginationComponent from "./components/pagination";
+import { toast } from "sonner";
 
 function Products() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -12,7 +13,6 @@ function Products() {
   const [products, setProducts] = useState<IProduct[]>([]);
 
   useEffect(() => {
-    // setLoading(true)    
     const fetchData = async () => {
       try {
         const { productsData, totalPages } = await fetchProducts(currentPage);
@@ -22,9 +22,7 @@ function Products() {
       } catch (error: any) {
         setProducts([]);
         setTotalPages(totalPages);
-        // toast.error("Failed to load listings");
-      } finally {
-        // setLoading(false)
+        toast.error("Issue happened, Please try again later");
       }
     };
     fetchData();

@@ -41,7 +41,7 @@ function ProductCard({ product }: ProductCardProps) {
           <span className="font-medium ">{product?.price}</span>
         </div>
         {product?.countAvailable < 3 && (
-          <span className="text-sm text-red-500">
+          <span className="text-xs text-red-500">
             {`Only ${product?.countAvailable} available in stock`}
           </span>
         )}

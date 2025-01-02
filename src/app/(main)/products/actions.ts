@@ -6,7 +6,7 @@ export async function fetchProducts(currentpage: number): Promise<any> {
   try {
     console.log("Fetching Products...");
 
-    const url = `${APIS.products}?page=${currentpage}&size=6`;
+    const url = `${APIS.products}?page=${currentpage}&size=20`;
     console.log(`Fetching Products Request URL => ${url}`);
 
     const response = await axiosInterceptorInstance.get(url);
@@ -17,6 +17,6 @@ export async function fetchProducts(currentpage: number): Promise<any> {
     return { productsData, totalPages };
   } catch (error: any) {
     console.error("Failed to fetch listing", error);
-    throw new Error("")
+    throw new Error()
   }
 }
