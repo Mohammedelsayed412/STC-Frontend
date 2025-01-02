@@ -14,7 +14,7 @@ const ListingsLayout: React.FC<RootLayoutProps> = ({ children }) => {
 
   return (
     <>
-      <header className="flex flex-col md:flex-row justify-between bg-white px-7 py-2 items-center gap-y-3 mb-10 text-slate-600">
+      <header className="flex justify-between bg-white px-7 py-2 items-center gap-y-3 mb-10 text-slate-600">
         <Image src={"/logo.png"} alt="stc_logo" width={60} height={60} />
         <div className="flex gap-x-6">
           <Link

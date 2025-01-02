@@ -8,7 +8,7 @@ import ProductCard from "./components/product-card";
 async function Products() {
   const products: IProduct[] = await fetchProducts();
   return (
-    <div className="mx-10 sm:mx-20 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+    <div className="mx-5 sm:mx-20 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5">
       {products?.map((elem: IProduct) => {
         return (
           <div key={elem?.id}>

@@ -1,6 +1,7 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription } from "@/components/ui/card";
+import CustomTooltip from "@/components/ui/custom/tooltip-custom";
 import { IProduct } from "@/lib/interfaces";
 import { Heart } from "lucide-react";
 import Image from "next/image";
@@ -11,7 +12,7 @@ interface ProductCardProps {
 }
 function ProductCard({ product }: ProductCardProps) {
   return (
-    <Card key={product.id} className="flex flex-col p-8 h-full gap-2">
+    <Card key={product.id} className="flex flex-col p-8 h-full gap-2 max-w-[300px] mx-auto">
       <div className="relative">
         <Image
           src={product?.image}
@@ -31,16 +32,19 @@ function ProductCard({ product }: ProductCardProps) {
       </div>
 
       <CardContent className="p-0 mt-2 h-full">
-        <p className="font-medium ">{product?.name}</p>
+        <CustomTooltip info={product?.name}>
+          <p className="font-medium truncate">{product?.name}</p>
+        </CustomTooltip>
         <p className=" text-muted-foreground text-sm">{product?.brand}</p>
-        <div className="flex gap-1 items-center">
-          <span className="text-sm"> In stock: </span>
-          <span className="text-base">{product?.countAvailable}</span>
+        <div className="flex items-start mt-1.5">
+          <span className="text-xs  mr-0.5 mt-[0.5px]">SAR</span>
+          <span className="font-medium ">{product?.price}</span>
         </div>
-        <div className="flex items-start ">
-          <span className="text-xs text-emerald-500 mr-0.5 mt-1">SAR</span>
-          <span className="font-medium text-emerald-500">{product?.price}</span>
-        </div>
+        {product?.countAvailable < 3 && (
+          <span className="text-sm text-red-500">
+            {`Only ${product?.countAvailable} available in stock`}
+          </span>
+        )}
       </CardContent>
       <Button variant={"outline"}>
         <Image
