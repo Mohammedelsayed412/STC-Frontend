@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { ICartItem, IProduct } from "@/lib/interfaces";
 import { toast } from "sonner";
 import { useCartStore } from "@/store/useCartStore";
@@ -16,14 +16,19 @@ function Cart() {
   const router = useRouter();
   const cartItems: ICartItem[] = useCartStore((state) => state.cartItems);
   const editCart: any = useCartStore((state) => state.editCart);
-  const totalQuantity: any = useCartStore((state) => state.totalQuantity);
-  const totalPrice: any = useCartStore((state) => state.totalPrice);
+  const totalQuantity: number = useCartStore((state) => state.totalQuantity);
+  const totalPrice: number = useCartStore((state) => state.totalPrice);
   const clearCart: any = useCartStore((state) => state.clearCart);
+  const [isLoading, setIsloading] = useState(false);
 
   const checkout = () => {
-    clearCart();
-    toast.success("Your order is placed successfully with id 2175.");
-    router.push(PagesURLS.orders);
+    setIsloading(true);
+    setTimeout(() => {
+      clearCart();
+      toast.success("Your order is placed successfully with id 2175.");
+      router.push(PagesURLS.orders);
+      setIsloading(false);
+    }, 2000);
   };
 
   return (
@@ -59,6 +64,7 @@ function Cart() {
                 <p className="ml-auto text-emerald-500">FREE</p>
               </div>
               <Button
+                loading={isLoading}
                 variant={"primary"}
                 className="w-full font-semibold text-base"
                 onClick={() => {
