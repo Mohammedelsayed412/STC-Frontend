@@ -12,20 +12,8 @@ function Products() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const [products, setProducts] = useState<IProduct[]>([]);
-  const cartItems: ICartItem[] = useCartStore((state) => state.cartItems);
   const editCart: any = useCartStore((state) => state.editCart);
   const getQuantityById: any = useCartStore((state) => state.getQuantityById);
-
-  useEffect(() => {
-    const editCartAction = async () => {
-      console.log('inn');
-      
-      try {
-        await editCartItems(cartItems);
-      } catch (error) {}
-    };
-    editCartAction();
-  }, [cartItems]);
 
   useEffect(() => {
     const fetchData = async () => {

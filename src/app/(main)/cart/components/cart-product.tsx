@@ -1,33 +1,29 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import CustomTooltip from "@/components/ui/custom/tooltip-custom";
 import { CartAction } from "@/lib/enums";
-import { ICartProduct } from "@/lib/interfaces";
-import { getQuantity } from "@/lib/utils";
+import { IProduct } from "@/lib/interfaces";
 import { Minus, Plus, Trash2 } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 import { toast } from "sonner";
 
 interface CartProductProps {
-  cartProduct: ICartProduct;
+  cartProduct: IProduct;
   editCart: any;
   cartItems: any;
 }
 function CartProduct({ cartProduct, editCart, cartItems }: CartProductProps) {
-  console.log("cartProduct", cartProduct);
-
-  const addToCart = (id: number, productPrice: number) => {
-    editCart(id, CartAction.ADD, productPrice);
+  const addToCart = (product: IProduct) => {
+    editCart(CartAction.ADD, product);
   };
 
-  const subtractToCart = (id: number, productPrice: number) => {
-    editCart(id, CartAction.SUBTRACT, productPrice);
+  const subtractToCart = (product: IProduct) => {
+    editCart(CartAction.SUBTRACT, product);
   };
 
-  const deleteFromCart = (id: number, productPrice: number) => {
-    editCart(id, CartAction.DELETE, productPrice);
+  const deleteFromCart = (product: IProduct) => {
+    editCart(CartAction.DELETE, product);
     toast.warning("This item has been removed from your cart");
   };
   return (
@@ -60,7 +56,7 @@ function CartProduct({ cartProduct, editCart, cartItems }: CartProductProps) {
           <Button
             variant={"outline"}
             onClick={() => {
-              deleteFromCart(cartProduct?.id, cartProduct?.price);
+              deleteFromCart(cartProduct);
             }}
           >
             <Trash2 width={16} height={16} className="mr-2" />
@@ -76,7 +72,7 @@ function CartProduct({ cartProduct, editCart, cartItems }: CartProductProps) {
               size={"icon"}
               className="hover:bg-purple-800 hover:text-white"
               onClick={() => {
-                subtractToCart(cartProduct?.id, cartProduct?.price);
+                subtractToCart(cartProduct);
               }}
             >
               <Minus width={20} height={20} />
@@ -89,7 +85,7 @@ function CartProduct({ cartProduct, editCart, cartItems }: CartProductProps) {
               variant={"ghost"}
               size={"icon"}
               onClick={() => {
-                addToCart(cartProduct?.id, cartProduct?.price);
+                addToCart(cartProduct);
               }}
             >
               <Plus width={20} height={20} />

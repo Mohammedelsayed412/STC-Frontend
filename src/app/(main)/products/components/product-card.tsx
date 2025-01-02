@@ -1,12 +1,9 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import CustomTooltip from "@/components/ui/custom/tooltip-custom";
 import { CartAction } from "@/lib/enums";
-import { ICartItem, IProduct } from "@/lib/interfaces";
-import { getQuantity } from "@/lib/utils";
-import { useCartStore } from "@/store/useCartStore";
-import { Heart } from "lucide-react";
+import { IProduct } from "@/lib/interfaces";
 import Image from "next/image";
 import React, { useEffect } from "react";
 import { toast } from "sonner";
@@ -17,13 +14,13 @@ interface ProductCardProps {
   getQuantityById: any;
 }
 function ProductCard({ product, editCart, getQuantityById }: ProductCardProps) {
-  const addToCart = (id: number, productPrice: number) => {
-    editCart(id, CartAction.ADD, productPrice);
+  const addToCart = (product: IProduct) => {
+    editCart(CartAction.ADD, product);
     toast.success("This item has been added to your cart");
   };
 
-  const deleteFromCart = (id: number, productPrice: number) => {
-    editCart(id, CartAction.DELETE, productPrice);
+  const deleteFromCart = (product: IProduct) => {
+    editCart(CartAction.DELETE, product);
     toast.warning("This item has been removed from your cart");
   };
   return (
@@ -68,7 +65,7 @@ function ProductCard({ product, editCart, getQuantityById }: ProductCardProps) {
         <Button
           variant={"destructive"}
           onClick={() => {
-            deleteFromCart(product?.id, product?.price);
+            deleteFromCart(product);
           }}
         >
           <Image
@@ -84,7 +81,7 @@ function ProductCard({ product, editCart, getQuantityById }: ProductCardProps) {
         <Button
           variant={"outline"}
           onClick={() => {
-            addToCart(product?.id, product?.price);
+            addToCart(product);
           }}
         >
           <Image
