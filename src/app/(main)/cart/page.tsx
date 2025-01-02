@@ -9,9 +9,7 @@ import CartProduct from "./components/cart-product";
 import { Card } from "@/components/ui/card";
 
 function Cart() {
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(0);
-  const [cartProducts, setCartProducts] = useState<ICartProduct[]>([]);
+  // const [cartProducts, setCartProducts] = useState<ICartProduct[]>([]);
   const cartItems: any = useCartStore((state) => state.cartItems);
   const editCart: any = useCartStore((state) => state.editCart);
   const totalQuantity: any = useCartStore((state) => state.totalQuantity);
@@ -22,23 +20,20 @@ function Cart() {
     const fetchData = async () => {
       try {
         const cartData = await fetchCart();
-        setInitialCart(cartData)
-        setCartProducts(cartData);
-        setTotalPages(totalPages);
+        setInitialCart(cartData);
       } catch (error: any) {
-        setCartProducts([]);
-        setTotalPages(totalPages);
+        setInitialCart([]);
         toast.error("Issue happened, Please try again later");
       }
     };
     fetchData();
-  }, [currentPage]);
+  }, []);
   return (
     <div className="flex flex-col lg:flex-row gap-5 mb-10 mx-5 sm:mx-32 xl:mx-64">
-      {cartProducts?.length > 0 && (
+      {cartItems?.length > 0 && (
         <div className="w-full">
           <div className="grid grid-cols-1 gap-5">
-            {cartProducts?.map((elem: ICartProduct) => {
+            {cartItems?.map((elem: ICartProduct) => {
               return (
                 <div key={elem?.id}>
                   <CartProduct

@@ -1,12 +1,8 @@
+import { CartAction } from "@/lib/enums";
 import { ICartItem, ICartProduct } from "@/lib/interfaces";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-export enum CartAction {
-  ADD = "add",
-  REMOVE = "remove",
-  DELETE = "delete",
-}
 
 type CartState = {
   cartItems: ICartItem[];
@@ -29,13 +25,18 @@ export const useCartStore = create<CartState>()(
       editCart: (id, action, price) => {
         set((state) => {
           const existingItemIndex = state.cartItems.findIndex(
-            (item) => item.productId === id
+            (item) => item.id === id
           );
 
           let updatedItems = [...state.cartItems];
           let updatedTotalPrice = state.totalPrice;
           let updatedTotalQuantity = state.totalQuantity;
-
+          console.log('id',id);
+          console.log('state.cartItems',state.cartItems);
+          
+          console.log('updatedItems',updatedItems);
+          console.log('existingItemIndex',existingItemIndex);
+          
           // Handle Add action
           if (action === CartAction.ADD) {
             if (existingItemIndex >= 0) {
@@ -45,7 +46,7 @@ export const useCartStore = create<CartState>()(
             } else {
               updatedItems = [
                 ...state.cartItems,
-                { productId: id, quantity: 1 },
+                { id: id, quantity: 1 },
               ];
               updatedTotalPrice += price;
               updatedTotalQuantity += 1;
@@ -53,7 +54,7 @@ export const useCartStore = create<CartState>()(
           }
 
           // Handle Remove action
-          else if (action === CartAction.REMOVE) {
+          else if (action === CartAction.SUBTRACT) {
             if (existingItemIndex >= 0) {
               const currentItem = updatedItems[existingItemIndex];
               if (currentItem.quantity > 1) {
@@ -71,7 +72,7 @@ export const useCartStore = create<CartState>()(
               updatedTotalPrice -= currentItem.quantity * price;
               updatedTotalQuantity -= currentItem.quantity;
               updatedItems = updatedItems.filter(
-                (item) => item.productId !== id
+                (item) => item.id !== id
               );
             }
           }
@@ -91,8 +92,12 @@ export const useCartStore = create<CartState>()(
       setInitialCart: (cartData) => {
         set(() => {
           const cartItems = cartData.map((product) => ({
-            productId: product.id,
-            quantity: product.quantity,
+            id: product?.id,
+            name: product?.name,
+            image: product?.image,
+            price: product?.price,
+            quantity: product?.quantity,
+
           }));
 
           const totalQuantity = cartData.reduce(
@@ -112,7 +117,7 @@ export const useCartStore = create<CartState>()(
       // Function to get quantity of item by id
       getQuantityById: (id) => {
         const state = get();
-        const item = state.cartItems.find((item) => item.productId === id);
+        const item = state.cartItems.find((item) => item.id === id);
         return item ? item.quantity : 0;
       },
     }),

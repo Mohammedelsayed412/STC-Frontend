@@ -10,6 +10,6 @@ export function getQuantity(
   items: ICartItem[],
   id: number
 ): number | undefined {
-  const item = items.find((item) => item.productId === id);
+  const item = items.find((item) => item.id === id);
   return item?.quantity;
 }

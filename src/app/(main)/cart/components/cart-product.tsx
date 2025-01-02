@@ -16,12 +16,18 @@ interface CartProductProps {
   cartItems: any;
 }
 function CartProduct({ cartProduct, editCart, cartItems }: CartProductProps) {
+  console.log('cartProduct',cartProduct);
+  
   const addToCart = (id: number, productPrice: number) => {
     editCart(id, CartAction.ADD, productPrice);
   };
 
-  const deleteFromCart = (id: number) => {
-    editCart(id, CartAction.DELETE);
+  const subtractToCart = (id: number, productPrice: number) => {
+    editCart(id, CartAction.SUBTRACT, productPrice);
+  };
+
+  const deleteFromCart = (id: number, productPrice: number) => {
+    editCart(id, CartAction.DELETE, productPrice);
     toast.warning("This item has been removed from your cart");
   };
   return (
@@ -41,9 +47,7 @@ function CartProduct({ cartProduct, editCart, cartItems }: CartProductProps) {
 
       <div className="flex flex-col gap-2 w-full">
         <CardContent className="p-0">
-          <p className="font-medium text-base">
-            {cartProduct?.name}
-          </p>
+          <p className="font-medium text-base">{cartProduct?.name}</p>
 
           <span className=" text-muted-foreground text-sm">Get it </span>
           <span className="text-emerald-500 text-sm">Tomorrow</span>
@@ -53,7 +57,12 @@ function CartProduct({ cartProduct, editCart, cartItems }: CartProductProps) {
           </div>
         </CardContent>
         <div className="flex flex-col md:flex-row gap-2 justify-between">
-          <Button variant={"outline"}>
+          <Button
+            variant={"outline"}
+            onClick={() => {
+              deleteFromCart(cartProduct?.id, cartProduct?.price);
+            }}
+          >
             <Trash2 width={16} height={16} className="mr-2" />
             Remove
           </Button>
@@ -65,11 +74,22 @@ function CartProduct({ cartProduct, editCart, cartItems }: CartProductProps) {
               variant={"ghost"}
               size={"icon"}
               className="hover:bg-purple-800 hover:text-white"
+              onClick={() => {
+                subtractToCart(cartProduct?.id, cartProduct?.price);
+              }}
             >
               <Minus width={20} height={20} />
             </Button>
-            <p className="text-base font-medium text-white mx-2">15</p>
-            <Button variant={"ghost"} size={"icon"}>
+            <p className="text-base font-medium text-white mx-2">
+              {cartProduct?.quantity}
+            </p>
+            <Button
+              variant={"ghost"}
+              size={"icon"}
+              onClick={() => {
+                addToCart(cartProduct?.id, cartProduct?.price);
+              }}
+            >
               <Plus width={20} height={20} />
             </Button>
           </Badge>
