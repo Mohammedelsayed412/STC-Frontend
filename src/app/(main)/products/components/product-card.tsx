@@ -12,7 +12,10 @@ interface ProductCardProps {
 }
 function ProductCard({ product }: ProductCardProps) {
   return (
-    <Card key={product.id} className="flex flex-col p-8 h-full gap-2 max-w-[300px] mx-auto">
+    <Card
+      key={product.id}
+      className="flex flex-col p-8 h-full gap-2 max-w-[300px] mx-auto"
+    >
       <div className="relative">
         <Image
           src={product?.image}
@@ -46,16 +49,29 @@ function ProductCard({ product }: ProductCardProps) {
           </span>
         )}
       </CardContent>
-      <Button variant={"outline"}>
-        <Image
-          className="mr-2"
-          src={"/add-to-cart.svg"}
-          alt="Add to cart"
-          width={20}
-          height={20}
-        />
-        <p className="text-base">Add To Cart</p>
-      </Button>
+      {product?.countAvailable > 0 ? (
+        <Button variant={"outline"}>
+          <Image
+            className="mr-2"
+            src={"/add-to-cart.svg"}
+            alt="Add to cart"
+            width={20}
+            height={20}
+          />
+          <p className="text-base">Add To Cart</p>
+        </Button>
+      ) : (
+        <Button variant={"outline"} disabled={true}>
+          <Image
+            className="mr-2"
+            src={"/out-of-stock.svg"}
+            alt="Out of stock"
+            width={24}
+            height={24}
+          />
+          <p className="text-base">Out of stock</p>
+        </Button>
+      )}
     </Card>
   );
 }
