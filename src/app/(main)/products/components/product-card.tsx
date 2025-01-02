@@ -14,16 +14,16 @@ import { toast } from "sonner";
 interface ProductCardProps {
   product: IProduct;
   editCart: any;
-  cartItems: ICartItem[];
+  getQuantityById: any;
 }
-function ProductCard({ product, editCart, cartItems }: ProductCardProps) {
-  const addToCart = (id: number) => {
-    editCart(id, CartAction.ADD);
+function ProductCard({ product, editCart, getQuantityById }: ProductCardProps) {
+  const addToCart = (id: number, productPrice: number) => {
+    editCart(id, CartAction.ADD, productPrice);
     toast.success("This item has been added to your cart");
   };
 
-  const deleteFromCart = (id: number) => {
-    editCart(id, CartAction.DELETE);
+  const deleteFromCart = (id: number, productPrice: number) => {
+    editCart(id, CartAction.DELETE, productPrice);
     toast.warning("This item has been removed from your cart");
   };
   return (
@@ -64,11 +64,11 @@ function ProductCard({ product, editCart, cartItems }: ProductCardProps) {
           </span>
         )}
       </CardContent>
-      {getQuantity(cartItems, product?.id) ? (
+      {getQuantityById(product?.id) ? (
         <Button
           variant={"destructive"}
           onClick={() => {
-            deleteFromCart(product?.id);
+            deleteFromCart(product?.id, product?.price);
           }}
         >
           <Image
@@ -84,7 +84,7 @@ function ProductCard({ product, editCart, cartItems }: ProductCardProps) {
         <Button
           variant={"outline"}
           onClick={() => {
-            addToCart(product?.id);
+            addToCart(product?.id, product?.price);
           }}
         >
           <Image

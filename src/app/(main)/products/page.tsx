@@ -14,6 +14,7 @@ function Products() {
   const [products, setProducts] = useState<IProduct[]>([]);
   const cartItems: ICartItem[] = useCartStore((state) => state.cartItems);
   const editCart: any = useCartStore((state) => state.editCart);
+  const getQuantityById: any = useCartStore((state) => state.getQuantityById);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -41,7 +42,7 @@ function Products() {
                   <ProductCard
                     product={elem}
                     editCart={editCart}
-                    cartItems={cartItems}
+                    getQuantityById={getQuantityById}
                   />
                 </div>
               );
@@ -52,6 +53,7 @@ function Products() {
             currentPage={currentPage}
             setCurrentPage={setCurrentPage}
             totalPages={totalPages}
+            
           />
         </div>
       )}
