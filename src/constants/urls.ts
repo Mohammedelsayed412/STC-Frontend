@@ -1,5 +1,6 @@
 export const APIS = {
   products: "/products",
+  cart: "/cart",
 };
 
 export const PagesURLS = {

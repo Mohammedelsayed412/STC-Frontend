@@ -16,7 +16,7 @@ export async function fetchProducts(currentpage: number): Promise<any> {
     const totalPages = response?.data?.totalPages;
     return { productsData, totalPages };
   } catch (error: any) {
-    console.error("Failed to fetch listing", error);
+    console.error("Failed to fetch products", error);
     throw new Error()
   }
 }

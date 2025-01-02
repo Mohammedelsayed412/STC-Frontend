@@ -12,3 +12,14 @@ export interface ICartItem {
   productId: number;
   quantity: number;
 }
+
+export interface ICartProduct {
+  id: number;
+  name: string;
+  image: string;
+  price: number;
+  countAvailable: number;
+  brand: string;
+  isBestSeller: boolean;
+  quantity: number;
+}
