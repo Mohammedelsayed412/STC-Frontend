@@ -41,7 +41,7 @@ function ProductCard({ product, editCart, cartItems }: ProductCardProps) {
         />
         {product?.isBestSeller && (
           <Badge
-            className="absolute top-1 right-1.5 bg-yellow-400 rounded-2xl text-xs px-2 py-1"
+            className="absolute top-1 right-1.5 bg-yellow-400 rounded-2xl text-xs px-1"
             variant="outline"
           >
             Best Seller
@@ -58,7 +58,7 @@ function ProductCard({ product, editCart, cartItems }: ProductCardProps) {
           <span className="text-xs  mr-0.5 mt-[0.5px]">SAR</span>
           <span className="font-medium ">{product?.price}</span>
         </div>
-        {product?.countAvailable < 3 && (
+        {product?.countAvailable < 3 && product?.countAvailable > 0 && (
           <span className="text-xs text-red-500">
             {`Only ${product?.countAvailable} available in stock`}
           </span>
