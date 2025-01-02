@@ -6,7 +6,7 @@ import { toast } from "sonner";
 import { useCartStore } from "@/store/useCartStore";
 import CartProduct from "./components/cart-product";
 import { Card } from "@/components/ui/card";
-import { ArrowRight, ShoppingCart } from "lucide-react";
+import { ArrowRight, ShoppingCart, Trash2 } from "lucide-react";
 import { Button, buttonVariants } from "@/components/ui/button";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -33,7 +33,7 @@ function Cart() {
       )}
       {cartItems?.length > 0 && (
         <div className="flex flex-col lg:flex-row gap-5 ">
-          <div className="w-full">
+          <div className="w-full flex flex-col">
             <div className="grid grid-cols-1 gap-5">
               {cartItems?.map((elem: ICartItem) => {
                 return (
@@ -68,6 +68,17 @@ function Cart() {
                 Checkout
               </Button>
             </Card>
+            <Button
+              className="w-full mt-4 px-8"
+              variant={"destructive"}
+              onClick={() => {
+                clearCart();
+              }}
+            >
+              {/* TODO ==> must show dialog to validate action */}
+              <Trash2 width={20} height={20} className="mr-2" />
+              Clear Cart
+            </Button>
           </div>
         </div>
       )}
