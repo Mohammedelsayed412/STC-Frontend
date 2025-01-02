@@ -66,7 +66,7 @@ function ProductCard({ product, editCart, cartItems }: ProductCardProps) {
       </CardContent>
       {getQuantity(cartItems, product?.id) ? (
         <Button
-          variant={"outline"}
+          variant={"destructive"}
           onClick={() => {
             deleteFromCart(product?.id);
           }}
@@ -78,7 +78,7 @@ function ProductCard({ product, editCart, cartItems }: ProductCardProps) {
             width={20}
             height={20}
           />
-          <p className="text-base">Remove From Cart</p>
+          Remove From Cart
         </Button>
       ) : product?.countAvailable > 0 ? (
         <Button
@@ -94,7 +94,7 @@ function ProductCard({ product, editCart, cartItems }: ProductCardProps) {
             width={20}
             height={20}
           />
-          <p className="text-base">Add To Cart</p>
+          Add To Cart
         </Button>
       ) : (
         <Button variant={"outline"} disabled={true}>
@@ -105,7 +105,7 @@ function ProductCard({ product, editCart, cartItems }: ProductCardProps) {
             width={24}
             height={24}
           />
-          <p className="text-base">Out of stock</p>
+          Out of stock
         </Button>
       )}
     </Card>
