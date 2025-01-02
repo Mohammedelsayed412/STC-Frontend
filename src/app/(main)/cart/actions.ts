@@ -1,3 +1,5 @@
+'use server'
+
 import { APIS } from "@/constants/urls";
 import axiosInterceptorInstance from "@/lib/axiosInterceptorInstance";
 

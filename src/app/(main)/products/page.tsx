@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { fetchProducts } from "./actions";
+import { editCartItems, fetchProducts } from "./actions";
 import { ICartItem, IProduct } from "@/lib/interfaces";
 import ProductCard from "./components/product-card";
 import PaginationComponent from "./components/pagination";
@@ -15,6 +15,17 @@ function Products() {
   const cartItems: ICartItem[] = useCartStore((state) => state.cartItems);
   const editCart: any = useCartStore((state) => state.editCart);
   const getQuantityById: any = useCartStore((state) => state.getQuantityById);
+
+  useEffect(() => {
+    const editCartAction = async () => {
+      console.log('inn');
+      
+      try {
+        await editCartItems(cartItems);
+      } catch (error) {}
+    };
+    editCartAction();
+  }, [cartItems]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -53,7 +64,6 @@ function Products() {
             currentPage={currentPage}
             setCurrentPage={setCurrentPage}
             totalPages={totalPages}
-            
           />
         </div>
       )}

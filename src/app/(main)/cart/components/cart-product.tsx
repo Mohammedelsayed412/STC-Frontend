@@ -26,8 +26,9 @@ function CartProduct({ cartProduct, editCart, cartItems }: CartProductProps) {
   };
   return (
     <Card key={cartProduct.id} className="flex items-start p-8 gap-4 mx-auto">
-      <div>
+      <div className="min-w-36 min-h-20">
         <Image
+        layout="responsive"
           src={cartProduct?.image}
           alt={cartProduct?.name}
           width={140}
@@ -39,7 +40,7 @@ function CartProduct({ cartProduct, editCart, cartItems }: CartProductProps) {
       <div className="flex flex-col gap-2 ">
         <CardContent className="p-0">
           <CustomTooltip info={cartProduct?.name}>
-            <p className="font-medium text-xl truncate">{cartProduct?.name}</p>
+            <p className="font-medium text-xl">{cartProduct?.name}</p>
           </CustomTooltip>
           <span className=" text-muted-foreground text-sm">Get it </span>
           <span className="text-emerald-500 text-sm">Tomorrow</span>

@@ -34,7 +34,7 @@ function Cart() {
     fetchData();
   }, [currentPage]);
   return (
-    <div className="flex gap-5 mb-10 mx-5 sm:mx-20 ">
+    <div className="flex flex-col md:flex-row gap-5 mb-10 mx-5 sm:mx-20">
       {cartProducts?.length > 0 && (
         <div className="w-full">
           <div className="grid grid-cols-1 gap-5">
@@ -52,7 +52,7 @@ function Cart() {
           </div>
         </div>
       )}
-      <div className="min-w-72">
+      <div className="xl:min-w-96">
         <Card className="flex flex-col items-start p-8 gap-4 mx-auto">
           <p className="font-medium">Order Summary</p>
           <div className="w-full pl-2 grid grid-cols-2">
