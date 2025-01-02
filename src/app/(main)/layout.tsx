@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { PagesURLS } from "@/constants/urls";
 import { ShoppingCart } from "lucide-react";
+import { useCartStore } from "@/store/useCartStore";
 
 interface RootLayoutProps {
   children: React.ReactNode;
@@ -11,6 +12,7 @@ interface RootLayoutProps {
 
 const ListingsLayout: React.FC<RootLayoutProps> = ({ children }) => {
   const pathname: any = usePathname();
+  const totalQuantity: any = useCartStore((state) => state.totalQuantity);
 
   return (
     <>
@@ -42,7 +44,12 @@ const ListingsLayout: React.FC<RootLayoutProps> = ({ children }) => {
             Cart
           </Link>
         </div>
-        <div>
+        <div className="relative">
+          {totalQuantity > 0 && (
+            <span className="absolute bottom-[22px] right-2 text-white text-xs font-medium">
+              {totalQuantity}
+            </span>
+          )}
           <ShoppingCart width={30} height={30} className="text-white" />
         </div>
       </header>

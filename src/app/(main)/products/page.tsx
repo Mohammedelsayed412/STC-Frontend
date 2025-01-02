@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { fetchProducts } from "./actions";
-import { IProduct } from "@/lib/interfaces";
+import { ICartItem, IProduct } from "@/lib/interfaces";
 import ProductCard from "./components/product-card";
 import PaginationComponent from "./components/pagination";
 import { toast } from "sonner";
@@ -12,7 +12,7 @@ function Products() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const [products, setProducts] = useState<IProduct[]>([]);
-  const cartItems: any = useCartStore((state) => state.cartItems);
+  const cartItems: ICartItem[] = useCartStore((state) => state.cartItems);
   const editCart: any = useCartStore((state) => state.editCart);
 
   useEffect(() => {
@@ -38,7 +38,11 @@ function Products() {
             {products?.map((elem: IProduct) => {
               return (
                 <div key={elem?.id}>
-                  <ProductCard product={elem} editCart={editCart} cartItems={cartItems} />
+                  <ProductCard
+                    product={elem}
+                    editCart={editCart}
+                    cartItems={cartItems}
+                  />
                 </div>
               );
             })}

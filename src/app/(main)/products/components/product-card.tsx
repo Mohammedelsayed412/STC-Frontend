@@ -19,12 +19,12 @@ interface ProductCardProps {
 function ProductCard({ product, editCart, cartItems }: ProductCardProps) {
   const addToCart = (id: number) => {
     editCart(id, CartAction.ADD);
-    toast.success("Yout product added to cart");
+    toast.success("This item has been added to your cart");
   };
 
   const deleteFromCart = (id: number) => {
     editCart(id, CartAction.DELETE);
-    toast.warning("Yout product removed from cart");
+    toast.warning("This item has been removed from your cart");
   };
   return (
     <Card
