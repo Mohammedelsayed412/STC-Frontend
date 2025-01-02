@@ -2,7 +2,6 @@
 
 import { APIS } from "@/constants/urls";
 import axiosInterceptorInstance from "@/lib/axiosInterceptorInstance";
-import { ICartItem, IProduct } from "@/lib/interfaces";
 
 export async function fetchProducts(currentpage: number): Promise<any> {
   try {
